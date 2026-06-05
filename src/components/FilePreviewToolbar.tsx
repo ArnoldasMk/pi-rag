@@ -59,7 +59,7 @@ export function FilePreviewToolbar(props: FilePreviewToolbarProps) {
             class={`fv-tb-btn${props.formatOnSave ? ' fv-tb-btn--active' : ''}`}
             title={
               props.formatOnSave
-                ? 'Format on save enabled (⌘⇧F to format now)'
+                ? 'Format on save enabled (Ctrl+Shift+F to format now)'
                 : 'Format on save disabled'
             }
             onClick={() => props.onFormatOnSaveToggle()}
@@ -117,7 +117,7 @@ export function FilePreviewToolbar(props: FilePreviewToolbarProps) {
           <button
             type="button"
             class={`fv-tb-btn${props.isDirty ? ' fv-tb-btn--dirty' : ''}`}
-            title={props.truncatedFile ? 'Cannot save truncated file' : 'Save (⌘S)'}
+            title={props.truncatedFile ? 'Cannot save truncated file' : 'Save (Ctrl+S)'}
             onClick={() => void props.onSave()}
             disabled={!props.isDirty || props.saving || props.truncatedFile}
           >

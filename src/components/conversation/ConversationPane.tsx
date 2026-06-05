@@ -1,4 +1,3 @@
-import logoUrl from '@icons/icon.svg'
 import { ArrowDown, Clock3, FolderOpen, GitBranch } from 'lucide-solid'
 import { type Component, createEffect, createMemo, createSignal, Show } from 'solid-js'
 import { createStore, reconcile } from 'solid-js/store'
@@ -260,10 +259,6 @@ export const ConversationPane: Component<ConversationPaneProps> = (props) => {
           fallback={
             <div class="empty-conversation">
               <section class="empty-session-hero" aria-label="New session workspace summary">
-                <span class="empty-session-logo-frame" aria-hidden="true">
-                  <img src={logoUrl} alt="" />
-                </span>
-                <h1 class="empty-session-title">Build anything your way</h1>
                 <button
                   type="button"
                   class="empty-session-path-btn"

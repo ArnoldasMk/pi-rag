@@ -10,6 +10,7 @@ import type {
   PromptTemplate,
   ProviderInfo,
   ProviderLoginEvent,
+  ProviderUsage,
   SettingsResult,
   SkillItem,
   ThemeColors,
@@ -25,6 +26,8 @@ export const resourcesApi = {
   saveSettings: (scope: 'global' | 'project', settings: PiSettings): Promise<void> =>
     ipcRenderer.invoke(IPC.SAVE_SETTINGS, { scope, settings }),
   openExternal: (url: string): Promise<void> => ipcRenderer.invoke(IPC.OPEN_EXTERNAL, url),
+  openWebClient: (id: 'chatgpt' | 'claude'): Promise<void> =>
+    ipcRenderer.invoke(IPC.OPEN_WEB_CLIENT, id),
   readThemeColors: (absolutePath: string): Promise<ThemeColors | null> =>
     ipcRenderer.invoke(IPC.READ_THEME_COLORS, absolutePath),
   readThemeTokens: (absolutePath: string): Promise<ThemeTokens | null> =>
@@ -46,6 +49,7 @@ export const resourcesApi = {
     ipcRenderer.invoke(IPC.LIST_DIRECTORY, { path: relPath }),
 
   getProviders: (): Promise<ProviderInfo[]> => ipcRenderer.invoke(IPC.GET_PROVIDERS),
+  getProviderUsage: (): Promise<ProviderUsage[]> => ipcRenderer.invoke(IPC.GET_PROVIDER_USAGE),
   setProviderKey: (provider: string, apiKey: string): Promise<void> =>
     ipcRenderer.invoke(IPC.SET_PROVIDER_KEY, { provider, apiKey }),
   removeProviderKey: (provider: string): Promise<void> =>

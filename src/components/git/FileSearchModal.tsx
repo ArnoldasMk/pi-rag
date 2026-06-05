@@ -11,7 +11,7 @@
  *   .*   — Use Regular Expression
  *
  * Keyboard: ↑/↓ navigate across both sections · Enter preview · Esc close
- * Keybinding: Shift+⌘F / Shift+Ctrl+F (wired in App)
+ * Keybinding: Ctrl+Shift+F (wired in App)
  */
 
 // biome-ignore-all lint/a11y/useKeyWithClickEvents lint/a11y/noStaticElementInteractions lint/a11y/useSemanticElements: existing search modal backdrop/panel interactions are tracked separately from this release.

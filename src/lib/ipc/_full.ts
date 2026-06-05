@@ -61,6 +61,8 @@ export const sessionListOptionsSchema = z
     showRecent: z.boolean().optional(),
     recentDays: z.number().int().positive().max(365).optional(),
     workspacePath: z.string().min(1).optional(),
+    /** When true, list sessions across ALL workspaces (ignores workspacePath). */
+    allWorkspaces: z.boolean().optional(),
     limit: z.number().int().positive().max(500).optional(),
     offset: z.number().int().nonnegative().max(100_000).optional(),
   })
@@ -358,6 +360,26 @@ export const providerInfoSchema = z.object({
   credentialType: z.enum(['api_key', 'oauth', 'env', 'other']).optional(),
 })
 export type ProviderInfo = z.infer<typeof providerInfoSchema>
+
+// Subscription usage / quota for a connected provider
+export const usageWindowSchema = z.object({
+  label: z.string(),
+  usedPercent: z.number(),
+  resetDescription: z.string().optional(),
+  resetAt: z.string().optional(),
+})
+export const providerUsageSchema = z.object({
+  id: z.enum(['anthropic', 'codex', 'copilot']),
+  displayName: z.string(),
+  shortName: z.string(),
+  connected: z.boolean(),
+  windows: z.array(usageWindowSchema),
+  requestsRemaining: z.number().optional(),
+  requestsEntitlement: z.number().optional(),
+  error: z.string().optional(),
+  stale: z.boolean().optional(),
+})
+export type ProviderUsage = z.infer<typeof providerUsageSchema>
 
 // OAuth login event streamed from main → renderer during login flow
 export type ProviderLoginEvent =

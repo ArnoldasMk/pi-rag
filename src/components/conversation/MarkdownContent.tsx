@@ -9,8 +9,10 @@
  *  - copy-to-clipboard button (event delegation via onClick on the container)
  */
 
+import 'katex/dist/katex.min.css'
 import DOMPurify from 'dompurify'
 import { Marked } from 'marked'
+import markedKatex from 'marked-katex-extension'
 import markedShiki from 'marked-shiki'
 import { type Component, createEffect, createSignal, onCleanup } from 'solid-js'
 import { activeShikiTheme, cachedCodeToHtml, ensureHighlighter, LANG_MAP } from '../../lib/shiki'
@@ -31,6 +33,18 @@ function sanitizeMarkdownHtml(html: string): string {
     ADD_TAGS: ['button'],
     ADD_ATTR: ['class', 'type', 'aria-label', 'aria-pressed', 'data-ln'],
   })
+}
+
+/**
+ * marked-katex-extension supports $...$ and $$...$$, but models often emit
+ * LaTeX's standard Markdown delimiters \(...\) and \[...\]. Convert those
+ * before Marked sees the text, otherwise Markdown eats the backslashes and the
+ * user sees literal `[ \sum ... ]` instead of rendered math.
+ */
+function normalizeMathDelimiters(text: string): string {
+  return text
+    .replace(/\\\[([\s\S]*?)\\\]/g, (_match, math: string) => `\n$$\n${math.trim()}\n$$\n`)
+    .replace(/\\\(([\s\S]*?)\\\)/g, (_match, math: string) => `$${math.trim()}$`)
 }
 
 /**
@@ -109,6 +123,7 @@ function getHighlightedParser(): Promise<Marked> {
   _parserPromise = ensureHighlighter()
     .then((h) => {
       const parser = new Marked({ gfm: true })
+      parser.use(markedKatex({ throwOnError: false, nonStandard: true }))
       parser.use(
         markedShiki({
           highlight(code, rawLang) {
@@ -161,6 +176,7 @@ export const MarkdownContent: Component<Props> = (props) => {
 
   createEffect(() => {
     const text = props.text
+    const markdownText = normalizeMathDelimiters(text)
     const isStreaming = props.streaming
     let cancelled = false
 
@@ -180,7 +196,9 @@ export const MarkdownContent: Component<Props> = (props) => {
     // flash that caused visible flicker on every streaming token.
     if (!html()) {
       void (async () => {
-        const result = new Marked({ gfm: true }).parse(text)
+        const plainParser = new Marked({ gfm: true })
+        plainParser.use(markedKatex({ throwOnError: false, nonStandard: true }))
+        const result = plainParser.parse(markdownText)
         const h = result instanceof Promise ? await result : result
         if (!cancelled) setHtml(sanitizeMarkdownHtml(wrapTables(h)))
       })()
@@ -195,7 +213,7 @@ export const MarkdownContent: Component<Props> = (props) => {
     renderTimer = setTimeout(
       () => {
         void getHighlightedParser()
-          .then((parser) => parser.parse(text))
+          .then((parser) => parser.parse(markdownText))
           .then((enhanced) => {
             if (!cancelled) {
               const finalHtml = sanitizeMarkdownHtml(wrapTables(enhanced))

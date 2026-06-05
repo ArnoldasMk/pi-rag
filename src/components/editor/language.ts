@@ -5,6 +5,8 @@ import { json } from '@codemirror/lang-json'
 import { markdown } from '@codemirror/lang-markdown'
 import { python } from '@codemirror/lang-python'
 import { rust } from '@codemirror/lang-rust'
+import { StreamLanguage } from '@codemirror/language'
+import { stex } from '@codemirror/legacy-modes/mode/stex'
 import type { Extension } from '@codemirror/state'
 
 const LANG_MAP: Record<string, (() => Extension) | undefined> = {
@@ -22,6 +24,10 @@ const LANG_MAP: Record<string, (() => Extension) | undefined> = {
   md: () => markdown(),
   mdx: () => markdown(),
   markdown: () => markdown(),
+  tex: () => StreamLanguage.define(stex),
+  latex: () => StreamLanguage.define(stex),
+  sty: () => StreamLanguage.define(stex),
+  cls: () => StreamLanguage.define(stex),
   css: () => css(),
   scss: () => css(),
   less: () => css(),

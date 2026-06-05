@@ -23,8 +23,9 @@ export function createMainWindow(options: CreateWindowOptions): BrowserWindow {
     height: 900,
     minWidth: 900,
     minHeight: 600,
-    title: 'OpenPi',
+    title: 'Pi RAG',
     icon: appIconPath(),
+    autoHideMenuBar: true,
     titleBarStyle: 'hiddenInset',
     backgroundColor: '#111111',
     webPreferences: {
@@ -34,6 +35,8 @@ export function createMainWindow(options: CreateWindowOptions): BrowserWindow {
       sandbox: true,
     },
   })
+
+  mainWindow.setMenu(null)
 
   if (process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)

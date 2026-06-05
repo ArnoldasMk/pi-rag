@@ -1,15 +1,16 @@
 {
-  "name": "openpi",
+  "name": "pi-rag",
   "private": true,
   "version": "0.1.19",
   "type": "module",
-  "description": "OpenPi desktop workbench for the Pi coding agent.",
+  "description": "Pi RAG desktop workbench for the Pi coding agent.",
   "main": "out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "preview": "electron-vite preview",
     "package": "npm run build && electron-builder --config electron-builder.json",
+    "package:linux": "npm run build && electron-builder --linux AppImage deb tar.gz --config electron-builder.json",
     "prepare": "git config core.hooksPath .githooks",
     "precommit": "npm run lint",
     "lint": "biome check .",
@@ -25,7 +26,8 @@
     "release:major": "node scripts/release.mjs major",
     "release:prerelease": "node scripts/release.mjs prerelease",
     "brew:update": "node scripts/update-brew.mjs",
-    "postinstall": "electron-rebuild -f -w better-sqlite3"
+    "ensure:electron": "node scripts/ensure-electron.mjs",
+    "postinstall": "node scripts/ensure-electron.mjs && electron-rebuild -f -w better-sqlite3"
   },
   "dependencies": {
     "@codemirror/commands": "^6.10.3",
@@ -37,6 +39,7 @@
     "@codemirror/lang-python": "^6.2.1",
     "@codemirror/lang-rust": "^6.0.2",
     "@codemirror/language": "^6.12.3",
+    "@codemirror/legacy-modes": "^6.5.3",
     "@codemirror/lint": "^6.9.6",
     "@codemirror/search": "^6.7.0",
     "@codemirror/state": "^6.6.0",
@@ -70,8 +73,10 @@
     "electron-updater": "^6.8.3",
     "electron-window-state": "^5.0.3",
     "fuzzysort": "^3.1.0",
+    "katex": "^0.17.0",
     "lucide-solid": "^1.14.0",
     "marked": "^15.0.12",
+    "marked-katex-extension": "^5.1.10",
     "marked-shiki": "^1.2.1",
     "material-icon-theme": "^5.34.0",
     "morphdom": "^2.7.4",

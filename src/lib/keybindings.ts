@@ -93,49 +93,49 @@ export const KEYBINDING_CONFIG = {
     label: 'Toggle Sidebar',
     description: 'Show or hide the session sidebar',
     category: 'general',
-    defaultKeys: 'Cmd+B',
+    defaultKeys: 'Ctrl+B',
   },
   toggleGitPanel: {
     label: 'Toggle Git Panel',
     description: 'Show or hide the source control panel',
     category: 'general',
-    defaultKeys: 'Shift+Cmd+G',
+    defaultKeys: 'Ctrl+Shift+G',
   },
   toggleFileTree: {
     label: 'Toggle File Tree',
     description: 'Show or hide the file tree in the sidebar',
     category: 'general',
-    defaultKeys: 'Cmd+\\',
+    defaultKeys: 'Ctrl+\\',
   },
   openCustomizations: {
     label: 'Open Customizations',
     description: 'Open the customizations modal',
     category: 'general',
-    defaultKeys: 'Cmd+,',
+    defaultKeys: 'Ctrl+,',
   },
   openCommandPalette: {
     label: 'Command Palette',
     description: 'Search files, commands, and sessions',
     category: 'general',
-    defaultKeys: 'Shift+Cmd+P',
+    defaultKeys: 'Ctrl+Shift+P',
   },
   openFileSearch: {
     label: 'Open File Search',
     description: 'Search and navigate files in the workspace',
     category: 'general',
-    defaultKeys: 'Shift+Cmd+F',
+    defaultKeys: 'Ctrl+Shift+F',
   },
   openProject: {
     label: 'Open Project',
     description: 'Pick a new workspace / open project folder',
     category: 'general',
-    defaultKeys: 'Cmd+O',
+    defaultKeys: 'Ctrl+O',
   },
   archiveSession: {
     label: 'Archive Session',
     description: 'Archive the current session',
     category: 'session',
-    defaultKeys: 'Shift+Cmd+Backspace',
+    defaultKeys: 'Ctrl+Shift+Backspace',
   },
   compactSession: {
     label: 'Compact Session',
@@ -153,13 +153,13 @@ export const KEYBINDING_CONFIG = {
     label: 'New Session',
     description: 'Start a new agent session',
     category: 'session',
-    defaultKeys: 'Shift+Cmd+S',
+    defaultKeys: 'Ctrl+Shift+S',
   },
   nextMessage: {
     label: 'Next Message',
     description: 'Move to the next message in the session',
     category: 'session',
-    defaultKeys: 'Alt+Cmd+]',
+    defaultKeys: 'Alt+Shift+]',
   },
   nextSession: {
     label: 'Next Session',
@@ -177,7 +177,7 @@ export const KEYBINDING_CONFIG = {
     label: 'Previous Message',
     description: 'Move to the previous message in the session',
     category: 'session',
-    defaultKeys: 'Alt+Cmd+[',
+    defaultKeys: 'Alt+Shift+[',
   },
   previousSession: {
     label: 'Previous Session',
@@ -201,19 +201,19 @@ export const KEYBINDING_CONFIG = {
     label: 'Stop Auto-Accepting Permissions',
     description: 'Stop automatically accepting permission prompts',
     category: 'session',
-    defaultKeys: 'Shift+Cmd+A',
+    defaultKeys: 'Ctrl+Shift+A',
   },
   renameSession: {
     label: 'Rename Session',
     description: 'Rename the current session',
     category: 'session',
-    defaultKeys: 'Shift+Cmd+R',
+    defaultKeys: 'Ctrl+Shift+R',
   },
   toggleSteps: {
     label: 'Toggle Steps',
     description: 'Show or hide session step details',
     category: 'session',
-    defaultKeys: 'Cmd+E',
+    defaultKeys: 'Ctrl+E',
   },
   interruptAgent: {
     label: 'Interrupt / Stop Agent',
@@ -225,13 +225,13 @@ export const KEYBINDING_CONFIG = {
     label: 'Choose Model',
     description: 'Open the model selection dropdown',
     category: 'model',
-    defaultKeys: "Cmd+'",
+    defaultKeys: "Ctrl+'",
   },
   cycleThinkingEffort: {
     label: 'Cycle Thinking Effort',
     description: 'Cycle through thinking effort levels (off, minimal, low, medium, high, xhigh)',
     category: 'model',
-    defaultKeys: 'Shift+Cmd+D',
+    defaultKeys: 'Ctrl+Shift+D',
   },
   goBack: {
     label: 'Navigate Back',
@@ -249,49 +249,49 @@ export const KEYBINDING_CONFIG = {
     label: 'Add Files',
     description: 'Add files to the conversation context',
     category: 'navigation',
-    defaultKeys: 'Cmd+/',
+    defaultKeys: 'Ctrl+/',
   },
   openFile: {
     label: 'Open File',
     description: 'Quick-open a file from the workspace',
     category: 'navigation',
-    defaultKeys: 'Cmd+K',
+    defaultKeys: 'Ctrl+K',
   },
   closeFileTab: {
     label: 'Close File Tab',
     description: 'Close the active file tab in the file pane',
     category: 'navigation',
-    defaultKeys: 'Cmd+W',
+    defaultKeys: 'Ctrl+W',
   },
   searchInFile: {
     label: 'Search in File',
     description: 'Open find bar in the active file pane',
     category: 'navigation',
-    defaultKeys: 'Cmd+F',
+    defaultKeys: 'Ctrl+F',
   },
   toggleTerminal: {
     label: 'Toggle Terminal',
     description: 'Show or hide the terminal panel',
     category: 'terminal',
-    defaultKeys: 'Cmd+J',
+    defaultKeys: 'Ctrl+J',
   },
   newTerminal: {
     label: 'New Terminal',
     description: 'Open a new terminal tab',
     category: 'terminal',
-    defaultKeys: 'Shift+Cmd+T',
+    defaultKeys: 'Ctrl+Shift+T',
   },
   focusComposer: {
     label: 'Focus Composer',
     description: 'Move focus to the prompt input',
     category: 'prompt',
-    defaultKeys: 'Cmd+L',
+    defaultKeys: 'Ctrl+L',
   },
   sendPrompt: {
     label: 'Send as Prompt',
     description: 'Send the current input as a prompt to the agent',
     category: 'prompt',
-    defaultKeys: 'Shift+Cmd+E',
+    defaultKeys: 'Ctrl+Shift+E',
   },
   submitPrompt: {
     label: 'Submit Prompt',
@@ -309,7 +309,7 @@ export const KEYBINDING_CONFIG = {
     label: 'Toggle Shell Mode',
     description: 'Switch between regular prompt and shell input mode',
     category: 'prompt',
-    defaultKeys: 'Shift+Cmd+X',
+    defaultKeys: 'Ctrl+Shift+X',
   },
   clearInput: {
     label: 'Clear Input',
@@ -357,15 +357,11 @@ export function normalizeBinding(keys: string): string {
 
 export function formatKeyLabel(keys: string): string {
   return keys
-    .replace(/Ctrl/g, '⌃')
-    .replace(/Shift/g, '⇧')
-    .replace(/Alt/g, '⌥')
-    .replace(/Cmd/g, '⌘')
     .replace(/Escape/g, 'Esc')
-    .replace(/Enter/g, '↵')
-    .replace(/Backspace/g, '⌫')
-    .replace(/Delete/g, '⌦')
-    .replace(/Tab/g, '⇥')
+    .replace(/Enter/g, 'Enter')
+    .replace(/Backspace/g, 'Backspace')
+    .replace(/Delete/g, 'Delete')
+    .replace(/Tab/g, 'Tab')
     .replace(/Arrow/g, '')
 }
 

@@ -50,7 +50,7 @@ export function FilePreviewFindBar(props: FilePreviewFindBarProps) {
         <button
           type="button"
           class={`fv-find-replace-toggle${props.findReplaceOpen ? ' is-active' : ''}`}
-          title={`${props.findReplaceOpen ? 'Hide' : 'Show'} Replace (Cmd+⌥F)`}
+          title={`${props.findReplaceOpen ? 'Hide' : 'Show'} Replace (Ctrl+Alt+F)`}
           onClick={() => {
             const next = !props.findReplaceOpen
             props.onFindReplaceOpenToggle(next)
@@ -214,7 +214,7 @@ export function FilePreviewFindBar(props: FilePreviewFindBarProps) {
             <button
               type="button"
               class="fv-find-replace-btn"
-              title="Replace all (Cmd+↩)"
+              title="Replace all (Ctrl+Enter)"
               onClick={props.onReplaceAll}
               disabled={props.findTotal === 0 || !props.modeIsEdit}
             >

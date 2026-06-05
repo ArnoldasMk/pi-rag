@@ -20,13 +20,15 @@ export function useSessionIndex(getFallbackWorkspacePath: () => string | null) {
 
   const loadSessionIndex = async (workspaceOverride?: string | null) => {
     const workspacePath = workspaceOverride ?? selectedWorkspaceForQuery()
+    // Main list shows ALL conversations across every workspace (not location
+    // specific). Grouping still surfaces each thread's location.
     const options: SessionListOptions = {
       query: sessionQuery(),
       sortBy: sortBy(),
       groupBy: groupBy(),
       showRecent: showRecent(),
       recentDays: RECENT_DAYS,
-      workspacePath: workspacePath ?? undefined,
+      allWorkspaces: true,
     }
     const [workspaceList, sessionList] = await Promise.all([
       window.openpi.getWorkspaces(),

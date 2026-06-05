@@ -90,7 +90,7 @@ interface FilePreviewPaneProps {
   workspaceName: string
   /** True while another overlay (e.g. file search) is active; suppresses focus/hotkeys. */
   background?: boolean
-  /** When true, the find bar is opened immediately (e.g. from Cmd+F keybinding). */
+  /** When true, the find bar is opened immediately (e.g. from Ctrl+F keybinding). */
   findOpen?: boolean
   /** Called after the find bar is opened so the parent can reset its trigger signal. */
   onFindOpened?: () => void
@@ -275,12 +275,12 @@ export function FilePreviewPane(props: FilePreviewPaneProps) {
       }
       if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'f') {
         e.preventDefault()
-        find.openFindBar(true) // Cmd+Shift+F → find with replace (like VS Code/Zed)
+        find.openFindBar(true) // Ctrl+Shift+F → find with replace (like VS Code/Zed)
       }
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'f') {
         e.preventDefault()
         if (e.altKey) {
-          find.openFindBar(true) // Cmd+Alt+F → open with replace
+          find.openFindBar(true) // Ctrl+Alt+F → open with replace
         } else {
           find.openFindBar()
         }

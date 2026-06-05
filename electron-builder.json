@@ -1,7 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "dev.openpi.app",
-  "productName": "OpenPi",
+  "appId": "dev.pirag.app",
+  "productName": "Pi RAG",
+  "executableName": "pi-rag",
+  "artifactName": "pi-rag-${version}-${os}-${arch}.${ext}",
   "asar": true,
   "asarUnpack": [
     "node_modules/@ff-labs/**",
@@ -33,7 +35,8 @@
   "linux": {
     "category": "Development",
     "icon": "icons/icon.png",
-    "target": ["AppImage"]
+    "maintainer": "Pi RAG contributors",
+    "target": ["AppImage", "deb", "tar.gz"]
   },
   "win": {
     "icon": "icons/icon.ico",
@@ -41,8 +44,8 @@
   },
   "publish": {
     "provider": "github",
-    "owner": "heyhuynhgiabuu",
-    "repo": "openpi",
+    "owner": "ArnoldasMk",
+    "repo": "pi-rag",
     "releaseType": "release"
   }
 }

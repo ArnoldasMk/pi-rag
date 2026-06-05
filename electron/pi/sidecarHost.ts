@@ -14,7 +14,7 @@ import type { SidecarCommand, SidecarMessage } from './sidecar'
 const currentDir = path.dirname(fileURLToPath(import.meta.url))
 
 const SIDECAR_PATH = path.join(currentDir, 'piSidecar.js')
-const SIDECAR_SERVICE_NAME = 'openpi-pi-sidecar'
+const SIDECAR_SERVICE_NAME = 'pi-rag-pi-sidecar'
 const RESTART_DELAY_MS = 1500
 const MAX_RESTARTS = 3
 
@@ -96,8 +96,23 @@ export class PiSidecarHost {
 
   private spawnChild(): void {
     const nodeExecutable = findNodeExecutable()
-    // Let the openpi-bridge extension identify itself as OpenPi
-    const bridgeEnv = { ...process.env, OPENPI_BRIDGE_APP: 'openpi' }
+    // Keep npm package operations inside a user-writable prefix. On several Linux
+    // distros, GUI-launched npm defaults to /usr/lib and Pi package discovery can
+    // try to repair/install configured packages there, producing EACCES noise.
+    const npmPrefix = process.env.npm_config_prefix || path.join(app.getPath('userData'), 'npm')
+    const npmBin = path.join(npmPrefix, 'bin')
+    // Let the openpi-bridge extension identify itself as Pi RAG.
+    const bridgeEnv = {
+      ...process.env,
+      OPENPI_BRIDGE_APP: 'pi-rag',
+      // Desktop startup should not auto-repair/update Pi packages in system npm
+      // locations. Manual package install/update actions still run explicitly.
+      PI_OFFLINE: process.env.PI_OFFLINE ?? '1',
+      npm_config_prefix: npmPrefix,
+      NPM_CONFIG_PREFIX: npmPrefix,
+      PREFIX: npmPrefix,
+      PATH: `${npmBin}${path.delimiter}${process.env.PATH ?? ''}`,
+    }
     const child: SidecarProcess = nodeExecutable
       ? fork(SIDECAR_PATH, [], {
           execPath: nodeExecutable,

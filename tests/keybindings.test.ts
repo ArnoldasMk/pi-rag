@@ -46,12 +46,12 @@ describe('keybindings config', () => {
 
   it('builds one runtime entry for every configured action id', () => {
     const entries = buildKeybindingEntries({
-      toggleSidebar: 'Ctrl+B',
+      toggleSidebar: 'Alt+B',
       clearInput: 'Unassigned',
     })
 
     expect(entries.map((entry) => entry.id)).toEqual([...KEYBINDING_ACTION_IDS])
-    expect(findBinding(entries, 'toggleSidebar')).toBe('Ctrl+B')
+    expect(findBinding(entries, 'toggleSidebar')).toBe('Alt+B')
     expect(findBinding(entries, 'clearInput')).toBe('Unassigned')
     expect(entries.find((entry) => entry.id === 'toggleSidebar')?.isModified).toBe(true)
     expect(entries.find((entry) => entry.id === 'newSession')?.keys).toBe(
@@ -62,12 +62,12 @@ describe('keybindings config', () => {
   it('matches keyboard events against configured bindings after normalization', () => {
     const event = new KeyboardEvent('keydown', {
       key: 'b',
-      metaKey: true,
+      ctrlKey: true,
       shiftKey: true,
     })
 
-    expect(eventMatchesBinding(event, 'Shift+Cmd+B')).toBe(true)
-    expect(eventMatchesBinding(event, 'Cmd+Shift+B')).toBe(true)
+    expect(eventMatchesBinding(event, 'Shift+Ctrl+B')).toBe(true)
+    expect(eventMatchesBinding(event, 'Ctrl+Shift+B')).toBe(true)
     expect(eventMatchesBinding(event, 'Unassigned')).toBe(false)
   })
 

@@ -61,8 +61,8 @@ const _require = createRequire(import.meta.url)
 // so subprocesses (npm, git, node) can be found regardless of launch method.
 enrichPathFromLoginShell()
 
-app.setName('OpenPi')
-app.setAppUserModelId('dev.openpi.app')
+app.setName('Pi RAG')
+app.setAppUserModelId('dev.pirag.app')
 
 async function confirmHighRiskMutation(options: {
   title: string

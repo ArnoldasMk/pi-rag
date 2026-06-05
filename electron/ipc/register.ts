@@ -1,5 +1,5 @@
 import type { BrowserWindow, IpcMain } from 'electron'
-import type { OutputLine } from '../../src/lib/ipc'
+import { IPC, type OutputLine } from '../../src/lib/ipc'
 import type * as GitHost from '../git/gitHost'
 import { registerGitIpc } from '../git/ipc'
 import { registerProviderHandlers } from '../pi/providerHost'
@@ -17,6 +17,7 @@ import {
   quitAndInstall,
   readChangelog,
 } from '../services/updater'
+import { openWebClient, type WebClientId } from '../services/webClientHost'
 import {
   buildWorkbenchContextPrefix,
   getWorkbenchContext,
@@ -205,6 +206,9 @@ export function registerMainIpcHandlers(deps: RegisterMainIpcHandlersDeps): void
     startSession,
     refreshSessionIndex,
     emitOutputLine: deps.emitOutputLine,
+  })
+  deps.ipcMain.handle(IPC.OPEN_WEB_CLIENT, (_event, id: WebClientId) => {
+    openWebClient(id, deps.getMainWindow())
   })
   registerThemeIpc(deps.ipcMain)
   registerDiagnosticsIpc({

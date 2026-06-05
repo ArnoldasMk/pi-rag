@@ -144,7 +144,7 @@ export function BottomBar(props: BottomBarProps) {
             type="button"
             class={`bottom-bar-btn${props.leftDrawerOpen && props.leftDrawerMode === 'threads' ? ' is-active' : ''}`}
             onClick={props.onToggleThreads}
-            title="Show thread history (⌘B)"
+            title="Show thread history (Ctrl+B)"
             aria-pressed={props.leftDrawerOpen && props.leftDrawerMode === 'threads'}
           >
             <MessageSquareText size={13} />
@@ -243,7 +243,7 @@ export function BottomBar(props: BottomBarProps) {
             type="button"
             class={`bottom-bar-btn${props.terminalOpen ? ' is-active' : ''}`}
             onClick={props.onToggleTerminal}
-            title="Toggle terminal (⌘J)"
+            title="Toggle terminal (Ctrl+J)"
             aria-pressed={props.terminalOpen}
           >
             <SquareTerminal size={13} />

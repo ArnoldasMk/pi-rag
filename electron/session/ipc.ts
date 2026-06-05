@@ -194,8 +194,11 @@ export function registerSessionsIpc(deps: SessionsIpcDeps): void {
     IPC.GET_SESSIONS,
     async (_event, raw: unknown): Promise<SessionListItem[]> => {
       const options = sessionListOptionsSchema.parse(raw)
-      const workspacePath = options.workspacePath ?? deps.activeWorkspacePath()
-      if (!workspacePath) return []
+      // allWorkspaces lists every conversation regardless of location.
+      const workspacePath = options.allWorkspaces
+        ? undefined
+        : (options.workspacePath ?? deps.activeWorkspacePath() ?? undefined)
+      if (!options.allWorkspaces && !workspacePath) return []
 
       const sessionIndex = deps.getSessionIndex()
       if (!sessionIndex) return []

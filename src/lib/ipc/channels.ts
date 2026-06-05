@@ -94,6 +94,7 @@ export const IPC = {
   GET_SETTINGS: 'openpi:get-settings',
   SAVE_SETTINGS: 'openpi:save-settings',
   OPEN_EXTERNAL: 'openpi:open-external',
+  OPEN_WEB_CLIENT: 'openpi:open-web-client',
   READ_THEME_COLORS: 'openpi:read-theme-colors',
   READ_THEME_TOKENS: 'openpi:read-theme-tokens',
   ARCHIVE_SESSIONS: 'openpi:archive-sessions',
@@ -105,6 +106,7 @@ export const IPC = {
   LIST_DIRECTORY: 'openpi:list-directory',
 
   GET_PROVIDERS: 'openpi:get-providers',
+  GET_PROVIDER_USAGE: 'openpi:get-provider-usage',
   SET_PROVIDER_KEY: 'openpi:set-provider-key',
   REMOVE_PROVIDER_KEY: 'openpi:remove-provider-key',
   LOGIN_PROVIDER: 'openpi:login-provider',

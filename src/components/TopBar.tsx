@@ -2,10 +2,10 @@
  * TopBar — SolidJS version.
  * Three-zone header: macOS traffic-light spacer · session identity · settings.
  */
-import logoUrl from '@icons/icon.svg'
-import { GitBranch, MonitorCog } from 'lucide-solid'
+import { GitBranch, MessageCircle, MonitorCog, Sparkles } from 'lucide-solid'
 import { createSignal, Show } from 'solid-js'
 import type { ModelInfo } from '../lib/ipc'
+import { UsageChips } from './UsageChips'
 
 interface Props {
   workspaceName: string
@@ -54,10 +54,6 @@ export function TopBar(props: Props) {
       <div class="topbar-left-zone" aria-hidden="true" />
 
       <div class="topbar-center no-drag">
-        <span class="topbar-brand-icon" aria-hidden="true">
-          <img src={logoUrl} alt="" />
-        </span>
-
         <Show
           when={editing()}
           fallback={
@@ -85,6 +81,8 @@ export function TopBar(props: Props) {
             }}
           />
         </Show>
+
+        <UsageChips />
 
         <span class="topbar-sep">in</span>
 
@@ -147,6 +145,26 @@ export function TopBar(props: Props) {
       </div>
 
       <div class="topbar-right-zone">
+        <button
+          type="button"
+          class="topbar-ai-btn no-drag"
+          onClick={() => void window.openpi.openWebClient('chatgpt')}
+          title="Open ChatGPT (web)"
+          aria-label="Open ChatGPT"
+        >
+          <MessageCircle size={13} />
+          <span>ChatGPT</span>
+        </button>
+        <button
+          type="button"
+          class="topbar-ai-btn no-drag"
+          onClick={() => void window.openpi.openWebClient('claude')}
+          title="Open Claude.ai (web)"
+          aria-label="Open Claude"
+        >
+          <Sparkles size={13} />
+          <span>Claude</span>
+        </button>
         <button
           type="button"
           class="topbar-icon-btn no-drag"

@@ -217,7 +217,7 @@ export function TerminalPanel(props: Props) {
             type="button"
             class="terminal-panel-close"
             onClick={props.onClose}
-            title="Close panel (⌘J)"
+            title="Close panel (Ctrl+J)"
           >
             ×
           </button>

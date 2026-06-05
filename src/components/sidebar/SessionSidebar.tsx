@@ -109,7 +109,7 @@ export function SessionSidebar(props: SessionSidebarProps) {
               type="button"
               class="icon-button no-drag"
               onClick={props.onNewSession}
-              title="New thread (⌘N)"
+              title="New thread (Ctrl+Shift+S)"
               aria-label="New thread"
             >
               <Plus size={15} />

@@ -17,6 +17,7 @@ import {
   setThinkingSchema,
 } from '../../src/lib/ipc'
 import { getAgentDir } from '../services/shellEnv'
+import { getProviderUsage } from '../services/usageHost'
 import {
   createRequestId,
   getPiSidecarHost,
@@ -104,6 +105,11 @@ export function registerProviderHandlers(): void {
   ipcMain.handle(IPC.REMOVE_PROVIDER_KEY, async (_event, raw: unknown): Promise<void> => {
     const { provider } = removeProviderKeySchema.parse(raw)
     requirePiSidecar().send({ type: 'remove_provider_key', provider })
+  })
+
+  // ── Subscription usage / quota ──────────────────────────────────────────────
+  ipcMain.handle(IPC.GET_PROVIDER_USAGE, async () => {
+    return getProviderUsage()
   })
 
   // ── OAuth subscription login ───────────────────────────────────────────────

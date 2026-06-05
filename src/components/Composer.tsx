@@ -356,7 +356,7 @@ export const Composer: Component<ComposerProps> = (props) => {
                     setModelOpen(false)
                     setThinkingOpen(false)
                   }}
-                  title="Add context file (⌘/)"
+                  title="Add context file (Ctrl+/)"
                   aria-label="Add context file"
                 >
                   <Paperclip size={13} strokeWidth={2} />
